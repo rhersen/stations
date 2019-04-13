@@ -20,7 +20,10 @@ export default class App extends React.Component {
     return (
       <div className="App">
         {announcements.length > 0 ? (
-          <Header location={announcements[0].LocationSignature} />
+          <Header
+            clear={() => this.setState({ announcements: [] })}
+            location={announcements[0].LocationSignature}
+          />
         ) : (
           <StationMenu
             stations={stations}
