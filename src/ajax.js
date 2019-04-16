@@ -56,11 +56,6 @@ function getAnnouncements(callback, signature) {
   request.send()
 }
 
-function now() {
-  const d = new Date()
-  return [d.getHours(), d.getMinutes(), d.getSeconds()]
-}
-
 let intervalId
 
 function interval(callback) {
@@ -74,7 +69,6 @@ function clear() {
 module.exports = {
   getStations,
   getAnnouncements,
-  now,
   interval,
   clear,
   name

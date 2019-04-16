@@ -8,7 +8,7 @@ import "./App.css"
 export default class App extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { stations: [], announcements: [] }
+    this.state = { stations: [], announcements: [], now: new Date() }
   }
 
   componentDidMount() {
@@ -16,26 +16,29 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { stations, announcements } = this.state
+    const { stations, announcements, now } = this.state
     return (
       <div className="App">
         {announcements.length > 0 ? (
           <Header
-            clear={() => this.setState({ announcements: [] })}
+            clear={() => {
+              ajax.clear()
+              return this.setState({ announcements: [] })
+            }}
             location={announcements[0].LocationSignature}
           />
         ) : (
           <StationMenu
             stations={stations}
             fetchDepartures={signature =>
-              ajax.getAnnouncements(
-                announcements => this.setState({ announcements }),
-                signature
-              )
+              ajax.getAnnouncements(announcements => {
+                ajax.interval(() => this.setState({ now: new Date() }))
+                return this.setState({ announcements })
+              }, signature)
             }
           />
         )}
-        <Table announcements={announcements} />
+        <Table announcements={announcements} now={now} />
       </div>
     )
   }
