@@ -10,7 +10,7 @@ function onerror(e) {
 
 function getStations(callback) {
   const request = new XMLHttpRequest()
-  request.open("GET", "http://localhost:3000/json/pendel", true)
+  request.open("GET", `${apiHost()}/json/pendel`, true)
 
   request.onload = function() {
     const results = JSON.parse(this.responseText)
@@ -30,8 +30,7 @@ function getAnnouncements(callback, signature) {
 
   request.open(
     "GET",
-    "http://localhost:3000/json/departures?since=0:15&until=0:59&locations=" +
-      signature,
+    `${apiHost()}/json/departures?since=0:15&until=0:59&locations=${signature}`,
     true
   )
 
@@ -64,6 +63,12 @@ function interval(callback) {
 
 function clear() {
   return clearInterval(intervalId)
+}
+
+function apiHost() {
+  return process.env.NODE_ENV === "development"
+    ? "http://localhost:3000"
+    : "http://backend.hersen.net"
 }
 
 module.exports = {
