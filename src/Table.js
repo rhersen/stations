@@ -1,9 +1,11 @@
 import React from "react"
 import "./table.css"
+import TrainId from "./TrainId"
 import Short from "./Short"
 import Destination from "./Destination"
 import Time from "./Time"
 import Countdown from "./Countdown"
+import Deviation from "./Deviation"
 
 export default function Table({ announcements, now }) {
   return (
@@ -13,10 +15,12 @@ export default function Table({ announcements, now }) {
           const id = announcement.AdvertisedTrainIdent
           return (
             <tr key={id} className={direction(id)}>
+              <TrainId announcement={announcement} />
               <Short announcement={announcement} />
               <Destination announcement={announcement} />
               <Time announcement={announcement} />
               <Countdown announcement={announcement} now={now} />
+              <Deviation announcement={announcement} />
             </tr>
           )
         })}
