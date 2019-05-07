@@ -18,7 +18,7 @@ function getStations(callback) {
       element =>
         (names[element.LocationSignature] = element.AdvertisedShortLocationName)
     )
-    callback(results)
+    callback(results.sort((a, b) => b.north - a.north))
   }
 
   request.onerror = onerror
