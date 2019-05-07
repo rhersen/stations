@@ -1,5 +1,6 @@
 import React from "react"
 import "./table.css"
+import AdvertisedTime from "./AdvertisedTime"
 import TrainId from "./TrainId"
 import Short from "./Short"
 import Destination from "./Destination"
@@ -18,6 +19,7 @@ export default function Table({ announcements, now }) {
               <TrainId announcement={announcement} />
               <Short announcement={announcement} />
               <Destination announcement={announcement} />
+              <AdvertisedTime announcement={announcement} />
               <Time announcement={announcement} />
               <Countdown announcement={announcement} now={now} />
               <Deviation announcement={announcement} />

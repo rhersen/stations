@@ -39,6 +39,12 @@ td {
   }
 }
 
+@media (max-width: 580px) {
+  td.advertised {
+    display: none;
+  }
+}
+
 @media (max-width: 640px) {
   td.deviation {
     display: none;
